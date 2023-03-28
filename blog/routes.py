@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, flash
 from blog import app
 from blog.models import Entry, db
 from blog.forms import EntryForm
@@ -21,6 +21,7 @@ def create_entry():
             )
             db.session.add(entry)
             db.session.commit()
+            flash('Dodano nowy wpis!')
         else:
             errors = form.errors
     return render_template("entry_form.html", form=form, errors=errors)

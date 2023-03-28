@@ -6,6 +6,12 @@
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <meta name="description" content="">
  <title>MBlog</title>
+ 
+ {% with messages = get_flashed_messages() %}
+   {% for message in messages %}
+    {{ message }}
+   {% endfor %}
+ {% endwith %}
 
  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/starter-template/">
 
@@ -40,8 +46,8 @@
 
  <main role="main" class="container">
 
-   {% block content %}
-   {% endblock %}
+  {% block content %}
+  {% endblock %}
 
  </main><!-- /.container -->
  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
