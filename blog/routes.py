@@ -24,4 +24,4 @@ def create_entry():
             flash('Dodano nowy wpis!')
         else:
             errors = form.errors
-    return render_template("entry_form.html", form=form, errors=errors)
+    return render_template('entry_form.html', form=form, errors=errors)
