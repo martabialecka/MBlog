@@ -13,6 +13,6 @@ from blog import routes, models
 @app.shell_context_processor
 def make_shell_context():
    return {
-       "db": db,
-       "entry": models.Entry
+       'db': db,
+       'entry': models.Entry
    }

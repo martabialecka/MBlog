@@ -8,7 +8,7 @@ def index():
     all_posts = Entry.query.filter_by(is_published=True).order_by(Entry.pub_date.desc())
     return render_template('homepage.html', all_posts=all_posts)
 
-@app.route("/new-post/", methods=["GET", "POST"])
+@app.route('/new-post/', methods=['GET', 'POST'])
 def create_entry():
     form = EntryForm()
     errors = None
@@ -26,7 +26,7 @@ def create_entry():
             errors = form.errors
     return render_template('entry_form.html', form=form, errors=errors)
 
-@app.route("/edit-post/<int:entry_id>", methods=["GET", "POST"])
+@app.route('/edit-post/<int:entry_id>', methods=['GET', 'POST'])
 def edit_entry(entry_id):
     entry = Entry.query.filter_by(id=entry_id).first_or_404()
     form = EntryForm(obj=entry)
