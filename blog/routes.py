@@ -8,12 +8,12 @@ def index():
     all_posts = Entry.query.filter_by(is_published=True).order_by(Entry.pub_date.desc())
     return render_template('homepage.html', all_posts=all_posts)
 
-def entry(entry_id):
+def entry(entry_id = None):
     '''
-    entry_id == -1 means a new entry
-    entry_id > -1 means edit the entry at entry_id
+    entry_id == None means a new entry
+    entry_id != None means edit the entry at entry_id
     '''
-    if entry_id != -1:
+    if entry_id is not None:
         entry = Entry.query.filter_by(id=entry_id).first_or_404()
         form = EntryForm(obj=entry)
         flash_message = 'Wpis zmieniony!'
@@ -43,7 +43,7 @@ def entry(entry_id):
 
 @app.route("/new-post/", methods=["GET", "POST"])
 def create_entry():
-    return entry(-1)
+    return entry()
 
 @app.route("/edit-post/<int:entry_id>", methods=["GET", "POST"])
 def edit_entry(entry_id):
