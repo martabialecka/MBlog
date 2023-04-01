@@ -15,7 +15,7 @@ def login_required(view_func):
 @app.route('/')
 def index():
     all_posts = Entry.query.filter_by(is_published=True).order_by(Entry.pub_date.desc())
-    return render_template('homepage.html', all_posts=all_posts)
+    return render_template('homepage.html', all_posts=all_posts, logged_in=session.get('logged_in'))
 
 def entry(entry_id = None):
     '''
