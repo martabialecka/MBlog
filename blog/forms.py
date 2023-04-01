@@ -16,10 +16,10 @@ class LoginForm(FlaskForm):
 
     def validate_username(self, field):
         if field.data != Config.ADMIN_USERNAME:
-            raise ValidationError("Nieprawidłowa nazwa użytkownika")
+            raise ValidationError('Nieprawidłowa nazwa użytkownika')
         return field.data
 
     def validate_password(self, field):
         if field.data != Config.ADMIN_PASSWORD:
-            raise ValidationError("Nieprawidłowe hasło")
+            raise ValidationError('Nieprawidłowe hasło')
         return field.data

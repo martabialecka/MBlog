@@ -50,17 +50,18 @@ def entry(entry_id = None):
 
     return render_template('entry_form.html', form=form, errors=errors)
 
-@app.route("/new-post/", methods=["GET", "POST"])
+@app.route('/new-post/', methods=['GET', 'POST'])
 @login_required
 def create_entry():
     return entry()
 
-@app.route("/edit-post/<int:entry_id>", methods=["GET", "POST"])
+@app.route('/edit-post/<int:entry_id>', methods=['GET', 'POST'])
 @login_required
 def edit_entry(entry_id):
     return entry(entry_id)
 
-@app.route("/login/", methods=['GET', 'POST'])
+
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     errors = None
@@ -73,7 +74,7 @@ def login():
             return redirect(next_url or url_for('index'))
         else:
             errors = form.errors
-    return render_template("login_form.html", form=form, errors=errors)
+    return render_template('login_form.html', form=form, errors=errors)
 
 
 @app.route('/logout/', methods=['GET', 'POST'])
@@ -83,8 +84,8 @@ def logout():
         flash('Zostałaś wylogowana.', 'success')
     return redirect(url_for('index'))
 
-@app.route("/drafts/", methods=['GET'])
+@app.route('/drafts/', methods=['GET'])
 @login_required
 def list_drafts():
     drafts = Entry.query.filter_by(is_published=False).order_by(Entry.pub_date.desc())
-    return render_template("drafts.html", drafts=drafts)
+    return render_template('drafts.html', drafts=drafts)
