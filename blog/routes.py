@@ -60,6 +60,10 @@ def create_entry():
 def edit_entry(entry_id):
     return entry(entry_id)
 
+@app.route('/delete-post/<int:entry_id>', methods=['POST'])
+@login_required
+def delete_entry(entry_id):
+    pass
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
