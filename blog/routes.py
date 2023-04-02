@@ -15,7 +15,15 @@ def login_required(view_func):
 @app.route('/')
 def index():
     all_posts = Entry.query.filter_by(is_published=True).order_by(Entry.pub_date.desc())
+    session['url'] = '/'
     return render_template('homepage.html', all_posts=all_posts, logged_in=session.get('logged_in'))
+
+@app.route('/drafts/', methods=['GET'])
+@login_required
+def list_drafts():
+    drafts = Entry.query.filter_by(is_published=False).order_by(Entry.pub_date.desc())
+    session['url'] = '/drafts/'
+    return render_template('drafts.html', drafts=drafts)
 
 def entry(entry_id = None):
     '''
@@ -45,6 +53,7 @@ def entry(entry_id = None):
                 db.session.add(entry)
             db.session.commit()
             flash(flash_message)
+            return redirect('/' if form.is_published.data else '/drafts')
         else:
             errors = form.errors
 
@@ -68,7 +77,7 @@ def delete_entry(entry_id):
         db.session.delete(entry)
         db.session.commit()
         flash('Wpis usunięty.')
-    return redirect('/')
+    return redirect(session['url'])
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -92,9 +101,3 @@ def logout():
         session.clear()
         flash('Zostałaś wylogowana.', 'success')
     return redirect(url_for('index'))
-
-@app.route('/drafts/', methods=['GET'])
-@login_required
-def list_drafts():
-    drafts = Entry.query.filter_by(is_published=False).order_by(Entry.pub_date.desc())
-    return render_template('drafts.html', drafts=drafts)

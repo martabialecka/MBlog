@@ -133,3 +133,6 @@ dmypy.json
 
 # migrations
 migrations/
+
+#.vscode
+.vscode
