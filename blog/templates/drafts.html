@@ -23,6 +23,9 @@
            </a>
        </td>
        <td>{{ post.body|truncate(100, true) }}</td>
+       <td>
+           <form method="POST" action="/delete-post/{{post.id}}"><button>Usuń</button></form>
+       </td>
      </tr>
      {% endfor %}
    </tbody>

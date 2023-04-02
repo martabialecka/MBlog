@@ -63,7 +63,12 @@ def edit_entry(entry_id):
 @app.route('/delete-post/<int:entry_id>', methods=['POST'])
 @login_required
 def delete_entry(entry_id):
-    pass
+    entry = Entry.query.get(entry_id)
+    if entry is not None:
+        db.session.delete(entry)
+        db.session.commit()
+        flash('Wpis usunięty.')
+    return redirect('/')
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
