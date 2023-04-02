@@ -1,5 +1,13 @@
 # MBlog
 
+Before starting MBlog, set environment variables:
+
+```
+SECRET_KEY
+ADMIN_USERNAME
+ADMIN_PASSWORD
+```
+
 To run the "MBlog", install python 3.x and execute
 
 ```
